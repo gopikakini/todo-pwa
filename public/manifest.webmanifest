@@ -1,0 +1,12 @@
+{
+    "display": "standalone",
+    "description": "Shows random fox pictures. Hey, at least it isn't cats.",
+    "icons": [{
+        "src": "icon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }],
+    "name": "Todo PWA",
+    "short_name": "todo",
+    "start_url": "index.html"
+}
