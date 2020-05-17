@@ -14,4 +14,14 @@
 	}
 </script>
 
-<button on:click={googleSignIn}>Sign In with Google</button>
+
+<div class="page">
+
+
+<h2 class="title has-text-centered" style="margin-top:50px">TODO</h2>
+
+<div class="box" style="margin-top:50px">
+<button on:click={googleSignIn} class="button is-dark is-fullwidth">Sign In with Google</button>
+</div>
+
+</div>

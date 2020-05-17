@@ -6,26 +6,18 @@
     import Todo from './pages/Todo.svelte'
     import ShareTodo from './pages/ShareTodo.svelte'
     import Login from './pages/Login.svelte'
-    
 
 
     let user
-    let isUserLoggedIn=false
 
     firebase.auth().onAuthStateChanged(function(u) {
         if (u) {
             user = u
-            isUserLoggedIn = true
-
-        if (isUserLoggedIn){
             router.goto("/todos")
-        }else{
+
+        } else {
             router.goto("/login")
         }
-
-	} else {
-		isUserLoggedIn = false
-	}
 	});
 
 </script>

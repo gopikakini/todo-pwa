@@ -1,4 +1,5 @@
 <script>
+	import ShareTodo from './ShareTodo.svelte';
 
 export let todoid;
 export let todoname;
@@ -29,7 +30,7 @@ getUsers()
 
 function shareTodo(){
 
-    shared_users = [...shared_users, shareto]
+    let shared_users = [...shared_users, shareto]
 
     db.collection("todos").doc(todoid).update({
         users: shared_users
@@ -41,18 +42,36 @@ function shareTodo(){
 </script>
 
 
-<a href={"/todo/" + todoid + "/" + todoname}>Back</a>
+<div class="page">
 
-<h2>{decodeURIComponent(todoname)}</h2>
+  <div class="columns is-mobile" style="margin-top:20px;">
+	<div class="column is-2"><a href={"/todo/" + todoid + "/" + todoname} class="button">&lt;</a></div>
+    <div class="column">
+      <h2 class="subtitle">{decodeURIComponent(todoname)} List</h2>
+    </div>
 
-<h4>Shared Users</h4>
+  </div>
+
+<b>Shared Users</b><br><br>
 
 <ul>
 {#each shared_users as u}
-<li>{u}</li>
+    <div class="card">
+        <div class="card-content">
+        {u}
+        </div>
+    </div>
+
 {/each}
 </ul>
 
 
-<input type="text" bind:value={shareto}>
-<button on:click={shareTodo}>Share</button>
+<div class="card">
+<div class="card-content">
+    <input class="input" type="text" placeholder="john@doe" bind:value={shareto}>
+    <br><br>
+    <button on:click={shareTodo} class="button is-dark is-fullwidth">Share</button>
+</div>
+</div>
+
+</div>

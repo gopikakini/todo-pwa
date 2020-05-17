@@ -1,5 +1,8 @@
 <script>
 
+    import TodoListItem from '../components/TodoListItem.svelte'
+    import {router} from 'tinro'; 
+
     export let user;
 
 	var db = firebase.firestore();
@@ -12,6 +15,7 @@
 
     firebase.auth().onAuthStateChanged(function(u) {
         if (u) {
+            user=u
             getTodoLists()
         }
     })
@@ -47,15 +51,43 @@
 		});
     }
 
+    function signOut(){
+		firebase.auth().signOut().then(function() {
+			router.goto("/login")
+		}).catch(function(error) {
+			console.log(error.message)
+		});
+	}
+
 </script>
 
+<div class="page">
 
-<h1>Todo Lists </h1>
+<div class="columns is-mobile" style="margin-top:20px;">
+
+<div class="column">
+    <h2 class="title">Todo Lists</h2>
+</div>
+<div class="column is-4">
+    <button class="button is-dark" on:click={signOut}>Sign Out</button>
+</div>
+
+</div>
 
 {#each items_sorted as item}
-    <li><a href={"/todo/"+item.id+"/"+item.name}>{item.name}</a></li>
+
+    <TodoListItem url={"/todo/"+item.id+"/"+item.name} name={item.name}/>
     
 {/each}
 
-<input type="text" bind:value={todoListName}>
-<button on:click={addTodoList}>Create List</button>
+<div class="card">
+<div class="card-content">
+    <input class="input" type="text" placeholder="Todo List 1" bind:value={todoListName}>
+    <br><br>
+    <button on:click={addTodoList} class="button is-dark is-fullwidth">Create List</button>
+</div>
+</div>
+
+
+
+</div>
