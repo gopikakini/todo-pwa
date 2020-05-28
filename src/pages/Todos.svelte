@@ -76,7 +76,7 @@
 
 {#each items_sorted as item}
 
-    <TodoListItem url={"/todo/"+item.id+"/"+item.name} name={item.name}/>
+    <TodoListItem url={"/todo/"+item.id+"/"+item.name} name={item.name} id={item.id}/>
     
 {/each}
 

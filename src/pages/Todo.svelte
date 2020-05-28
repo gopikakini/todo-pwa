@@ -20,7 +20,8 @@
 
           let item = {
             id: doc.id,
-            title: doc.data()["text"]
+            title: doc.data()["text"],
+            checked: doc.data()["checked"]
           };
 
           items = [...items, item];
@@ -34,7 +35,8 @@
     db.collection("todo")
       .add({
         text: newitem,
-        todoid: todoid
+        todoid: todoid,
+        checked: false
       })
       .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
@@ -63,7 +65,7 @@
   <ul>
 
     {#each items as item}
-      <TodoItem id={item.id} title={item.title} />
+      <TodoItem id={item.id} title={item.title} checked={item.checked}/>
     {/each}
 
   </ul>
