@@ -30,7 +30,7 @@ getUsers()
 
 function shareTodo(){
 
-    let shared_users = [...shared_users, shareto]
+    shared_users = [...shared_users, shareto]
 
     db.collection("todos").doc(todoid).update({
         users: shared_users
